@@ -2,14 +2,14 @@
 const todosApp = {
     data() {
         return {
-            todos: [window.todos],
+            todos: [],
             newTodo: {
                 done: false
             }
         }
-    },  
+    },
     methods: {
-        addTodo: function () {
+        addTodo: function() {
             if (this.newTodo.text) {
                 this.todos.push(this.newTodo);
                 this.newTodo = {
@@ -17,20 +17,17 @@ const todosApp = {
                 };
                 localStorage.setItem("todos", JSON.stringify(this.todos));
             } else {
-                alert("To-do text is required");
+                alert("A descrição da tarefa é obrigatória");
             }
         }
     },
-    beforeCreate(){
-        console.log('Before create');
+    created() {
+        this.todos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : this.todos;
     },
-    created(){
-        console.log('Created');
-    },
-    beforeUpdate(){
-        console.log('Before update');
+    updated() {
+        localStorage.setItem("todos", JSON.stringify(this.todos));
     }
-};
+
+}
 
 Vue.createApp(todosApp).mount('#app');
-
