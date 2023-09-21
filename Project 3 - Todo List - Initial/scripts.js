@@ -21,6 +21,10 @@ const todosApp = {
             }
         }
     },
+    storeTodos(){
+        localStorage.setItem("todos", JSON.stringify(this.todos));
+        console.log('update');
+    },
     created() {
         this.todos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : this.todos;
     },
