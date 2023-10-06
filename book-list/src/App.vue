@@ -1,26 +1,24 @@
 <script setup>
-import { ref, reactive } from 'vue';
-
-let count = ref(0);
+import { reactive } from 'vue';
+import Progress from './components/Progress.vue'
 
 let courses = reactive([{
-  title: "Javascript"
+  title: "Javascript",
+  done: true
 }, {
-  title: "React"
+  title: "React",
+  done: false
 }, {
-  title: "Vue"
+  title: "Vue",
+  done: true
 },
 ]);
 
-let newCourse = {}
-
-function increment() {
-  count.value++;
-}
+let newCourse = {done: false}
 
 function addCourse() {
   courses.push(newCourse);
-  newCourse = {};
+  newCourse = {done: false};
 }
 
 </script>
@@ -40,6 +38,8 @@ function addCourse() {
 
     <input v-model="newCourse.title" type="text">
     <button @click="addCourse">Adicionar</button>
+
+    <Progress :courses="courses" />
 
   </div>
 </template>
